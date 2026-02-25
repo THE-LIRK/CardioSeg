@@ -1,0 +1,19 @@
+# Fichier requirements.txt généré automatiquement pour l'inférence sur Modal
+# Dépendances principales du projet
+
+# Deep Learning
+torch>=1.10
+pytorch-lightning>=1.5
+
+# Traitement d'images médicales
+nibabel
+SimpleITK
+torchio
+
+# Visualisation
+matplotlib
+
+# Utilitaires
+scikit-learn
+
+# (Optionnel selon Modal) : tqdm, pandas, etc.

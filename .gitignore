@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+.next/
+.vercel/
+
+# Environment
+.env
+.env.local
+.env.vercel.local
+.env*.local
+
+# Pretrained models (trop lourds pour GitHub, utiliser Git LFS ou téléchargement séparé)
+ml/pretrained_models/*.ckpt
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Build
+*.tsbuildinfo
+next-env.d.ts
