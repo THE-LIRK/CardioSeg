@@ -4,6 +4,7 @@
 # Deep Learning
 torch>=1.10
 pytorch-lightning>=1.5
+monai
 
 # Traitement d'images médicales
 nibabel

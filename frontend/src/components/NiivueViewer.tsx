@@ -10,15 +10,15 @@ interface NiivueViewerProps {
   initialMode?: ViewMode;
 }
 
-// ColorMap cardiaque pour les 8 labels (0-7)
+// ColorMap cardiaque pour les 10 labels (0-9)
 // Format natif Niivue : R, G, B, A, I arrays
-// Label 0 = background transparent (A=0), labels 1-7 = structures colorées
+// Label 0 = background transparent (A=0), labels 1-7 = structures cardiaques, 8-9 = coronaires
 const CARDIAC_COLORMAP = {
-  R: [0, 239, 59, 234, 34, 168, 249, 6],
-  G: [0, 68, 130, 179, 197, 85, 115, 182],
-  B: [0, 68, 246, 8, 94, 247, 22, 212],
-  A: [0, 255, 255, 255, 255, 255, 255, 255],
-  I: [0, 1, 2, 3, 4, 5, 6, 7],
+  R: [0, 239, 59, 234, 34, 168, 249, 6, 255, 255],
+  G: [0, 68, 130, 179, 197, 85, 115, 182, 255, 100],
+  B: [0, 68, 246, 8, 94, 247, 22, 212, 0, 255],
+  A: [0, 255, 255, 255, 255, 255, 255, 255, 255, 255],
+  I: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
   labels: [
     "Background",
     "Myocarde VG",
@@ -28,6 +28,8 @@ const CARDIAC_COLORMAP = {
     "Oreillette droite",
     "Aorte ascendante",
     "Artère pulmonaire",
+    "Coronaire gauche",
+    "Coronaire droite",
   ],
 };
 
@@ -79,7 +81,7 @@ export default function NiivueViewer({
           colormap: "gray",
           opacity: opacity,
           cal_min: 0,
-          cal_max: 7,
+          cal_max: 9,
           colormapLabel: CARDIAC_COLORMAP,
         });
 

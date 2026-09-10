@@ -12,6 +12,12 @@ node_modules/
 # Pretrained models (trop lourds pour GitHub, utiliser Git LFS ou téléchargement séparé)
 ml/pretrained_models/*.ckpt
 
+# Dossier d'entraînement coronaires (données brutes, pas pour le déploiement)
+SWIN_CORONAIRES_*/
+
+# Fichiers de test NIfTI (debug local)
+ml/*.nii.gz
+
 # Python
 __pycache__/
 *.pyc

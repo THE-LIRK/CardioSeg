@@ -16,7 +16,7 @@ const features = [
     icon: "🧠",
     title: "IA de pointe",
     description:
-      "Cascaded U-Net entraîné sur des milliers d'IRM cardiaques. Segmentation automatique de 7 structures.",
+      "Cascaded U-Net + SwinUNETR entraînés sur des milliers d'IRM cardiaques. Segmentation automatique de 9 structures.",
   },
   {
     icon: "⚡",
@@ -41,11 +41,13 @@ const features = [
 const structures = [
   { label: "Myocarde VG", color: "bg-red-500" },
   { label: "Oreillette gauche", color: "bg-blue-500" },
-  { label: "Ventricule gauche", color: "bg-yellow-500" },
-  { label: "Ventricule droit", color: "bg-green-500" },
-  { label: "Oreillette droite", color: "bg-purple-500" },
+  { label: "Ventricule gauche", color: "bg-amber-400" },
+  { label: "Ventricule droit", color: "bg-emerald-500" },
+  { label: "Oreillette droite", color: "bg-violet-500" },
   { label: "Aorte ascendante", color: "bg-orange-500" },
-  { label: "Artère pulmonaire", color: "bg-cyan-500" },
+  { label: "Artère pulmonaire", color: "bg-cyan-400" },
+  { label: "Coronaire gauche", color: "bg-yellow-300" },
+  { label: "Coronaire droite", color: "bg-fuchsia-400" },
 ];
 
 const plans = [
@@ -137,7 +139,7 @@ export default function HomePage() {
         <FadeIn delay={0.3}>
           <p className="mt-6 max-w-2xl text-lg text-black">
             Uploadez votre IRM cardiaque au format NIfTI. Notre IA (Cascaded
-            U-Net) segmente automatiquement 7 structures cardiaques avec une
+            U-Net + SwinUNETR) segmente automatiquement 9 structures cardiaques avec une
             précision clinique.
           </p>
         </FadeIn>
@@ -155,13 +157,13 @@ export default function HomePage() {
 
         {/* Structures badges */}
         <StaggerContainer className="mt-16 flex flex-wrap justify-center gap-3" staggerDelay={0.08}>
-          {structures.map((s) => (
+          {structures.map((s, i) => (
             <StaggerItem key={s.label}>
               <motion.span
-                className="flex items-center gap-2 rounded-full border border-gray-800 bg-gray-900 px-4 py-2 text-sm text-gray-200"
+                className="flex items-center gap-2 rounded-full border border-gray-600 bg-[#1a1a2e] px-4 py-2 text-sm text-white font-medium shadow-md"
                 whileHover={{ scale: 1.1, borderColor: "rgba(239,68,68,0.5)" }}
               >
-                <span className={`h-3 w-3 rounded-full ${s.color}`} />
+                <span className={`h-3.5 w-3.5 rounded-full ${s.color} ring-2 ring-white/30`} />
                 {s.label}
               </motion.span>
             </StaggerItem>
@@ -279,7 +281,7 @@ export default function HomePage() {
             <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
               {[
                 { value: "17.9M", label: "décès/an par maladies cardiovasculaires", color: "text-red-600", bg: "bg-red-50" },
-                { value: "7", label: "structures cardiaques segmentées", color: "text-blue-600", bg: "bg-blue-50" },
+                { value: "9", label: "structures cardiaques segmentées", color: "text-blue-600", bg: "bg-blue-50" },
                 { value: "~60s", label: "temps d'inférence moyen", color: "text-green-600", bg: "bg-green-50" },
                 { value: "×30", label: "plus rapide que le tracé manuel", color: "text-amber-600", bg: "bg-amber-50" },
               ].map((stat, i) => (
@@ -398,7 +400,7 @@ export default function HomePage() {
                 </span>
                 <h3 className="text-xl font-bold text-white">Segmentation</h3>
                 <p className="mt-3 text-red-100">
-                  Segmentation fine de 7 structures cardiaques (8 classes)
+                  Segmentation fine de 9 structures cardiaques + coronaires
                 </p>
                 <div className="mt-4 rounded-lg bg-white/10 px-3 py-2 text-xs text-red-100 font-mono">
                   8 classes · haute résolution

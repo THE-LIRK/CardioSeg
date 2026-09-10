@@ -16,7 +16,7 @@ export const CONFIG = {
   // Extensions acceptées
   ACCEPTED_EXTENSIONS: [".nii", ".nii.gz", ".gz"],
 
-  // Labels cardiaques (valeurs réelles dans le masque: 0-7)
+  // Labels cardiaques (valeurs réelles dans le masque: 0-9)
   CARDIAC_LABELS: {
     1: { name: "Myocarde VG", color: "#ef4444" },
     2: { name: "Oreillette gauche", color: "#3b82f6" },
@@ -25,6 +25,8 @@ export const CONFIG = {
     5: { name: "Oreillette droite", color: "#a855f7" },
     6: { name: "Aorte ascendante", color: "#f97316" },
     7: { name: "Artère pulmonaire", color: "#06b6d4" },
+    8: { name: "Coronaire gauche", color: "#ffff00" },
+    9: { name: "Coronaire droite", color: "#ff64ff" },
   },
   // Crédits gratuits par mois
   FREE_MONTHLY_CREDITS: 2,
