@@ -13,10 +13,11 @@ interface NiivueViewerProps {
 // ColorMap cardiaque pour les 10 labels (0-9)
 // Format natif Niivue : R, G, B, A, I arrays
 // Label 0 = background transparent (A=0), labels 1-7 = structures cardiaques, 8-9 = coronaires
+// Ordre des classes (MM-WHS) : 4 = 550 = oreillette droite, 5 = 600 = ventricule droit
 const CARDIAC_COLORMAP = {
-  R: [0, 239, 59, 234, 34, 168, 249, 6, 255, 255],
-  G: [0, 68, 130, 179, 197, 85, 115, 182, 255, 100],
-  B: [0, 68, 246, 8, 94, 247, 22, 212, 0, 255],
+  R: [0, 239, 59, 234, 34, 168, 249, 6, 163, 255],
+  G: [0, 68, 130, 179, 197, 85, 115, 182, 230, 100],
+  B: [0, 68, 246, 8, 94, 247, 22, 212, 53, 255],
   A: [0, 255, 255, 255, 255, 255, 255, 255, 255, 255],
   I: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
   labels: [
@@ -24,8 +25,8 @@ const CARDIAC_COLORMAP = {
     "Myocarde VG",
     "Oreillette gauche",
     "Ventricule gauche",
-    "Ventricule droit",
     "Oreillette droite",
+    "Ventricule droit",
     "Aorte ascendante",
     "Artère pulmonaire",
     "Coronaire gauche",
@@ -179,7 +180,7 @@ export default function NiivueViewer({
 
   const containerClass = isFullscreen
     ? "fixed inset-0 z-[100] flex flex-col bg-black"
-    : "relative flex flex-col rounded-2xl border border-gray-800 bg-gray-900 overflow-hidden";
+    : "relative flex flex-col rounded-2xl border border-gray-800 bg-gray-900 text-white overflow-hidden";
 
   return (
     <div className={containerClass}>
@@ -231,7 +232,7 @@ export default function NiivueViewer({
           )}
 
           <label className="flex items-center gap-2 text-xs text-gray-400">
-            Opacit\u00E9
+            Opacité
             <input
               type="range"
               min="0"
@@ -241,7 +242,7 @@ export default function NiivueViewer({
               onChange={(e) => setOpacity(parseFloat(e.target.value))}
               className="w-20 accent-red-500"
             />
-            <span className="w-8 text-right">{Math.round(opacity * 100)}%</span>
+            <span className="w-8 text-right text-gray-300">{Math.round(opacity * 100)}%</span>
           </label>
 
           <button

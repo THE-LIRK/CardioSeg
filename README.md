@@ -50,8 +50,8 @@ Le masque de sortie contient 10 labels :
 | 1 | Myocarde VG | U-Net 3D |
 | 2 | Oreillette gauche | U-Net 3D |
 | 3 | Ventricule gauche | U-Net 3D |
-| 4 | Ventricule droit | U-Net 3D |
-| 5 | Oreillette droite | U-Net 3D |
+| 4 | Oreillette droite | U-Net 3D |
+| 5 | Ventricule droit | U-Net 3D |
 | 6 | Aorte ascendante | U-Net 3D |
 | 7 | Artère pulmonaire | U-Net 3D |
 | 8 | Coronaire gauche | Swin UNETR V2 |

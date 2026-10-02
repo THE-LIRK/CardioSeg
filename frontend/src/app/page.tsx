@@ -42,11 +42,11 @@ const structures = [
   { label: "Myocarde VG", color: "bg-red-500" },
   { label: "Oreillette gauche", color: "bg-blue-500" },
   { label: "Ventricule gauche", color: "bg-amber-400" },
-  { label: "Ventricule droit", color: "bg-emerald-500" },
-  { label: "Oreillette droite", color: "bg-violet-500" },
+  { label: "Oreillette droite", color: "bg-emerald-500" },
+  { label: "Ventricule droit", color: "bg-violet-500" },
   { label: "Aorte ascendante", color: "bg-orange-500" },
   { label: "Artère pulmonaire", color: "bg-cyan-400" },
-  { label: "Coronaire gauche", color: "bg-yellow-300" },
+  { label: "Coronaire gauche", color: "bg-lime-400" },
   { label: "Coronaire droite", color: "bg-fuchsia-400" },
 ];
 
