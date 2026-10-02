@@ -313,7 +313,7 @@ function UploadPageContent() {
           <h1 className="mb-2 text-3xl font-bold">Nouvelle segmentation</h1>
           <div className="mb-8 flex items-center justify-between">
             <p className="text-gray-400">
-              Uploadez votre IRM cardiaque au format NIfTI (.nii.gz)
+              Importez votre angioscanner cardiaque au format NIfTI (.nii.gz)
             </p>
             {/* Badge crédits */}
             {!creditsLoading && userCredits && (
@@ -353,7 +353,7 @@ function UploadPageContent() {
           animate={
             dragOver
               ? { scale: 1.02, borderColor: "rgba(239,68,68,0.8)" }
-              : { scale: 1, borderColor: "rgba(55,65,81,1)" }
+              : { scale: 1, borderColor: "rgba(156,163,175,1)" }
           }
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
           className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-12 transition-colors ${
@@ -361,7 +361,7 @@ function UploadPageContent() {
               ? "bg-red-950/20"
               : file
               ? "border-green-600 bg-green-950/10"
-              : "bg-gray-900 hover:border-gray-500"
+              : "border-gray-400 bg-gray-900 hover:border-gray-300"
           }`}
         >
           <AnimatePresence mode="wait">
@@ -380,7 +380,7 @@ function UploadPageContent() {
                 >
                   📁
                 </motion.div>
-                <p className="font-medium">{file.name}</p>
+                <p className="font-medium text-white">{file.name}</p>
                 <p className="text-sm text-gray-400">
                   {(file.size / (1024 * 1024)).toFixed(1)} Mo
                 </p>
@@ -390,7 +390,7 @@ function UploadPageContent() {
                     setStatus("idle");
                     setError("");
                   }}
-                  className="mt-3 text-xs text-gray-500 hover:text-red-400"
+                  className="mt-3 text-xs text-gray-300 underline hover:text-red-400"
                 >
                   Changer de fichier
                 </button>
@@ -404,13 +404,13 @@ function UploadPageContent() {
                 className="flex flex-col items-center"
               >
                 <PulsingHeart size={80} />
-                <p className="mb-1 mt-4 font-medium">
+                <p className="mb-1 mt-4 font-medium text-white">
                   Glissez-déposez votre fichier NIfTI ici
                 </p>
-                <p className="mb-4 text-sm text-gray-500">
+                <p className="mb-4 text-sm text-gray-300">
                   ou cliquez pour sélectionner
                 </p>
-                <label className="cursor-pointer rounded-lg bg-gray-800 px-6 py-2 text-sm font-medium text-gray-300 transition-colors hover:bg-gray-700">
+                <label className="cursor-pointer rounded-lg border border-gray-400 bg-gray-800 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700">
                   Parcourir
                   <input
                     type="file"
@@ -488,20 +488,20 @@ function UploadPageContent() {
           <AnimatedButton
             onClick={handleUpload}
             disabled={!file || status === "processing" || status === "uploading"}
-            className="mt-6 w-full rounded-xl bg-red-600 py-4 text-lg font-semibold text-white transition-colors hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="mt-6 w-full rounded-xl bg-red-700 py-4 text-lg font-semibold text-white transition-colors hover:bg-red-800 disabled:cursor-not-allowed disabled:border disabled:border-gray-500 disabled:bg-gray-800 disabled:text-gray-400 disabled:hover:bg-gray-800"
           >
             {status === "processing"
               ? "Segmentation en cours..."
               : status === "uploading"
               ? "Envoi..."
-              : `Lancer la segmentation (${userCredits?.totalAvailable ?? "..."} crédits)`}
+              : `Lancer la segmentation (1 crédit)`}
           </AnimatedButton>
         )}
         </FadeIn>
 
         {/* Info */}
         <FadeIn delay={0.4}>
-        <div className="mt-8 grid grid-cols-3 gap-4 text-center text-sm text-gray-500">
+        <div className="mt-8 grid grid-cols-3 gap-4 text-center text-sm text-gray-400">
           <div>
             <p className="font-medium text-gray-300">~60s</p>
             <p>Temps moyen</p>

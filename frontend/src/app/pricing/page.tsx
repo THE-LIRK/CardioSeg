@@ -184,7 +184,7 @@ export default function PricingPage() {
                 Quels formats sont acceptés ?
               </p>
               <p className="mt-1 text-gray-400">
-                Fichiers NIfTI (.nii et .nii.gz) — IRM cardiaques.
+                Fichiers NIfTI (.nii et .nii.gz) — angioscanners cardiaques.
               </p>
             </div>
           </div>

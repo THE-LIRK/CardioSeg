@@ -129,7 +129,7 @@ export default function NiivueViewer({
     }
   }, [opacity, originalUrl]);
 
-  // Toggle affichage du volume original (l'IRM)
+  // Toggle affichage du volume original (le scanner)
   useEffect(() => {
     if (nvRef.current && originalUrl && nvRef.current.volumes.length > 1) {
       nvRef.current.volumes[0].opacity = showOriginal ? 1 : 0;
@@ -224,9 +224,9 @@ export default function NiivueViewer({
                   ? "bg-blue-600 text-white"
                   : "bg-gray-800 text-gray-400 hover:text-white"
               }`}
-              title={showOriginal ? "Masquer l'IRM originale" : "Afficher l'IRM originale"}
+              title={showOriginal ? "Masquer le scanner original" : "Afficher le scanner original"}
             >
-              {showOriginal ? "\uD83D\uDC41 IRM" : "\uD83D\uDEAB IRM"}
+              {showOriginal ? "\uD83D\uDC41 Scanner" : "\uD83D\uDEAB Scanner"}
             </button>
           )}
 

@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "CardioSeg — Segmentation cardiaque automatisée",
   description:
-    "Segmentation automatique du cœur par IA (Cascaded U-Net). Uploadez votre IRM cardiaque et obtenez une segmentation 3D en quelques secondes.",
+    "Segmentation automatique du cœur par IA (Cascaded U-Net). Importez votre angioscanner cardiaque et obtenez une segmentation 3D en quelques secondes.",
 };
 
 export default function RootLayout({

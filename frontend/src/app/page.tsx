@@ -16,7 +16,7 @@ const features = [
     icon: "🧠",
     title: "IA de pointe",
     description:
-      "Cascaded U-Net + SwinUNETR entraînés sur des milliers d'IRM cardiaques. Segmentation automatique de 9 structures.",
+      "Cascaded U-Net + SwinUNETR entraînés sur des milliers d'angioscanners cardiaques. Segmentation automatique de 9 structures.",
   },
   {
     icon: "⚡",
@@ -138,7 +138,7 @@ export default function HomePage() {
 
         <FadeIn delay={0.3}>
           <p className="mt-6 max-w-2xl text-lg text-black">
-            Uploadez votre IRM cardiaque au format NIfTI. Notre IA (Cascaded
+            Importez votre angioscanner cardiaque au format NIfTI. Notre IA (Cascaded
             U-Net + SwinUNETR) segmente automatiquement 9 structures cardiaques avec une
             précision clinique.
           </p>
@@ -212,7 +212,7 @@ export default function HomePage() {
                 <h3 className="mb-3 text-xl font-bold text-gray-900">Le problème actuel</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Un radiologue met en moyenne <span className="font-semibold text-amber-600">20 à 45 minutes</span> pour
-                  segmenter manuellement un cœur en IRM. Avec des centaines d'examens par mois, 
+                  segmenter manuellement un cœur en scanner. Avec des centaines d'examens par mois, 
                   c'est un goulet d'étranglement majeur.
                 </p>
               </div>
