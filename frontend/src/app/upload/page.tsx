@@ -317,8 +317,8 @@ function UploadPageContent() {
             </p>
             {/* Badge crédits */}
             {!creditsLoading && userCredits && (
-              <div className="flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-800/50 px-3 py-1.5">
-                <span className="text-sm text-gray-400">Crédits :</span>
+              <div className="flex items-center gap-2 rounded-lg border border-red-500 bg-red-950 px-3 py-1.5">
+                <span className="text-sm text-gray-300">Crédits :</span>
                 <span
                   className={`text-sm font-bold ${
                     userCredits.totalAvailable > 0
