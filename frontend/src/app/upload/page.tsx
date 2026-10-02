@@ -276,24 +276,27 @@ function UploadPageContent() {
   };
 
   const statusConfig = {
-    idle: { text: "", color: "" },
+    idle: { text: "", color: "", icon: "" },
     uploading: {
       text: "Envoi du fichier...",
-      color: "text-blue-400",
+      color: "text-blue-800",
+      icon: "↑",
     },
     processing: {
       text: "Segmentation en cours (~60s)...",
-      color: "text-yellow-400",
+      color: "text-amber-800",
+      icon: "⟳",
     },
     done: {
       text: "Segmentation terminée !",
-      color: "text-green-400",
+      color: "text-green-800",
+      icon: "✓",
     },
-    error: { text: error, color: "text-red-400" },
+    error: { text: error, color: "text-red-800", icon: "⚠" },
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-6 pt-16">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-white px-6 pt-16 text-gray-900">
       <div className="w-full max-w-2xl">
         {/* Notification paiement réussi */}
         <AnimatePresence>
@@ -302,7 +305,8 @@ function UploadPageContent() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="mb-4 rounded-lg border border-green-600 bg-green-950/30 p-4 text-center text-sm text-green-400"
+              className="mb-4 rounded-lg border border-green-700 bg-green-50 p-4 text-center text-sm text-green-800"
+              role="status"
             >
               Paiement réussi ! Vos crédits ont été ajoutés.
             </motion.div>
@@ -312,7 +316,7 @@ function UploadPageContent() {
         <FadeIn>
           <h1 className="mb-2 text-3xl font-bold">Nouvelle segmentation</h1>
           <div className="mb-8 flex items-center justify-between">
-            <p className="text-gray-400">
+            <p className="text-gray-700">
               Importez votre angioscanner cardiaque au format NIfTI (.nii.gz)
             </p>
             {/* Badge crédits */}
@@ -352,17 +356,13 @@ function UploadPageContent() {
           onDrop={onDrop}
           animate={
             dragOver
-              ? { scale: 1.02, borderColor: "rgba(239,68,68,0.8)" }
-              : { scale: 1, borderColor: "rgba(156,163,175,1)" }
+              ? { scale: 1.02, borderColor: "rgba(29,78,216,1)" }
+              : file
+              ? { scale: 1, borderColor: "rgba(21,128,61,1)" }
+              : { scale: 1, borderColor: "rgba(75,85,99,1)" }
           }
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-12 transition-colors ${
-            dragOver
-              ? "bg-red-950/20"
-              : file
-              ? "border-green-600 bg-green-950/10"
-              : "border-gray-400 bg-gray-900 hover:border-gray-300"
-          }`}
+          className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-12 bg-gray-50 text-gray-900 transition-colors`}
         >
           <AnimatePresence mode="wait">
             {file ? (
@@ -380,8 +380,8 @@ function UploadPageContent() {
                 >
                   📁
                 </motion.div>
-                <p className="font-medium text-white">{file.name}</p>
-                <p className="text-sm text-gray-400">
+                <p className="font-medium text-gray-900">{file.name}</p>
+                <p className="text-sm text-gray-700">
                   {(file.size / (1024 * 1024)).toFixed(1)} Mo
                 </p>
                 <button
@@ -390,7 +390,7 @@ function UploadPageContent() {
                     setStatus("idle");
                     setError("");
                   }}
-                  className="mt-3 text-xs text-gray-300 underline hover:text-red-400"
+                  className="mt-3 text-xs text-gray-700 underline hover:text-blue-800 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
                 >
                   Changer de fichier
                 </button>
@@ -404,19 +404,19 @@ function UploadPageContent() {
                 className="flex flex-col items-center"
               >
                 <PulsingHeart size={80} />
-                <p className="mb-1 mt-4 font-medium text-white">
+                <p className="mb-1 mt-4 font-medium text-gray-900">
                   Glissez-déposez votre fichier NIfTI ici
                 </p>
-                <p className="mb-4 text-sm text-gray-300">
+                <p className="mb-4 text-sm text-gray-700">
                   ou cliquez pour sélectionner
                 </p>
-                <label className="cursor-pointer rounded-lg border border-gray-400 bg-gray-800 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700">
+                <label className="cursor-pointer rounded-lg border border-gray-600 bg-white px-6 py-2 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-100 has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-blue-700">
                   Parcourir
                   <input
                     type="file"
                     accept=".nii,.nii.gz,.gz"
                     onChange={onFileSelect}
-                    className="hidden"
+                    className="sr-only"
                   />
                 </label>
               </motion.div>
@@ -435,15 +435,23 @@ function UploadPageContent() {
             className="mt-6"
           >
             <div className="mb-2 flex justify-between text-sm">
-              <span className={statusConfig[status].color}>
+              <span className={statusConfig[status].color} role="status">
+                <span aria-hidden="true">{statusConfig[status].icon} </span>
                 {statusConfig[status].text}
               </span>
-              <span className="text-gray-400">{progress}%</span>
+              <span className="text-gray-700">{progress}%</span>
             </div>
-            <div className="h-2 overflow-hidden rounded-full bg-gray-800">
+            <div
+              role="progressbar"
+              aria-label="Progression de la segmentation"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={progress}
+              className="h-3 overflow-hidden rounded-full border border-gray-600 bg-gray-200"
+            >
               <motion.div
                 className={`h-full rounded-full ${
-                  status === "done" ? "bg-green-500" : "bg-red-500"
+                  status === "done" ? "bg-green-700" : "bg-blue-700"
                 }`}
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
@@ -469,8 +477,10 @@ function UploadPageContent() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="mt-4 rounded-lg border border-red-900 bg-red-950/30 p-4 text-sm text-red-400"
+            className="mt-4 rounded-lg border border-red-700 bg-red-50 p-4 text-sm text-red-800"
+            role="alert"
           >
+            <span aria-hidden="true">⚠ </span>
             {error}
           </motion.div>
         )}
@@ -480,7 +490,7 @@ function UploadPageContent() {
         <FadeIn delay={0.3}>
         {userCredits && userCredits.totalAvailable <= 0 ? (
           <Link href="/pricing">
-            <div className="mt-6 w-full rounded-xl border-2 border-dashed border-red-500/50 bg-red-950/20 py-4 text-center text-lg font-semibold text-red-400 transition-colors hover:border-red-400 hover:bg-red-950/30 cursor-pointer">
+            <div className="mt-6 w-full rounded-xl border-2 border-dashed border-red-700 bg-red-50 py-4 text-center text-lg font-semibold text-red-800 transition-colors hover:bg-red-100 cursor-pointer">
               Crédits épuisés — Acheter des crédits
             </div>
           </Link>
@@ -488,7 +498,7 @@ function UploadPageContent() {
           <AnimatedButton
             onClick={handleUpload}
             disabled={!file || status === "processing" || status === "uploading"}
-            className="mt-6 w-full rounded-xl bg-red-700 py-4 text-lg font-semibold text-white transition-colors hover:bg-red-800 disabled:cursor-not-allowed disabled:border disabled:border-gray-500 disabled:bg-gray-800 disabled:text-gray-400 disabled:hover:bg-gray-800"
+            className="mt-6 w-full rounded-xl bg-blue-700 py-4 text-lg font-semibold text-white transition-colors hover:bg-blue-800 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:cursor-not-allowed disabled:border disabled:border-gray-600 disabled:bg-gray-200 disabled:text-gray-700 disabled:hover:bg-gray-200"
           >
             {status === "processing"
               ? "Segmentation en cours..."
@@ -501,17 +511,17 @@ function UploadPageContent() {
 
         {/* Info */}
         <FadeIn delay={0.4}>
-        <div className="mt-8 grid grid-cols-3 gap-4 text-center text-sm text-gray-400">
+        <div className="mt-8 grid grid-cols-3 gap-4 text-center text-sm text-gray-700">
           <div>
-            <p className="font-medium text-gray-300">~60s</p>
+            <p className="font-medium text-gray-900">~60s</p>
             <p>Temps moyen</p>
           </div>
           <div>
-            <p className="font-medium text-gray-300">GPU A10G</p>
+            <p className="font-medium text-gray-900">GPU A10G</p>
             <p>NVIDIA Cloud</p>
           </div>
           <div>
-            <p className="font-medium text-gray-300">7 structures</p>
+            <p className="font-medium text-gray-900">9 structures</p>
             <p>Segmentées</p>
           </div>
         </div>
